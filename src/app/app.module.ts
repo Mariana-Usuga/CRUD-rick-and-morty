@@ -12,7 +12,10 @@ import { MatInputModule } from '@angular/material/input'
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FormSearchComponent } from './shared/components/form-search/form-search.component'
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule }  from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,14 @@ import { MatButtonModule } from '@angular/material/button'
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatNativeDateModule,
+    MatPaginatorModule
+  ],
+  exports:[
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

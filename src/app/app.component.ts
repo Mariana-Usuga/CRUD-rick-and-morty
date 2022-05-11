@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Character } from './shared/interface/character.interface';
 import { CharacterService } from './shared/services/character.service';
@@ -11,10 +11,10 @@ import Swal from 'sweetalert2'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'CRUD-rick-and-morty';
 
-  characters: Character[] = [];
+  @Input() characters: Character[] = [];
   // createCharacter!: Character;
   // info: RequestInfo = {
   //   next: "",
