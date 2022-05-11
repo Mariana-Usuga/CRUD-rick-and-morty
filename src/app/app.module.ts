@@ -9,20 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card'
 import { MatInputModule } from '@angular/material/input'
-import { FormsModule } from '@angular/forms';
-import { CharactersListComponent } from './components/pages/characters/characters-list/characters-list.component';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FormSearchComponent } from './shared/components/form-search/form-search.component'
-// import { jsonPipe } from './convert-to-spaces.pipe'
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   declarations: [
     AppComponent,
-    CharactersListComponent,
     HeaderComponent,
     FormSearchComponent,
-    CharactersListComponent
-    // jsonPipe
   ],
   imports: [
     BrowserModule,
@@ -33,7 +29,9 @@ import { FormSearchComponent } from './shared/components/form-search/form-search
     CommonModule,
     MatCardModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

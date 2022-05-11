@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Character } from '@app/shared/interface/character.interface';
 
 @Component({
   selector: 'app-form-search',
@@ -13,11 +14,12 @@ export class FormSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSearch(value: string) {
-    if(value && value.length > 3){
-      this.router.navigate(['/character-list'], {
-        queryParams:{q:value}
-      })
-    }
-  }
+  // onSearch(value: string) {
+  //   if(value && value.length > 3){
+  //     this.router.navigate(['/character-list'], {
+  //       queryParams:{q:value}
+  //     })
+  //   }
+  // }
+
 }

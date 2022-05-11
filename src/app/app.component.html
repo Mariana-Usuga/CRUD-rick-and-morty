@@ -1,5 +1,42 @@
 <app-header></app-header>
-<div class="container">
-  <app-form-search></app-form-search>
-  <router-outlet></router-outlet>
+
+<div class="characters">
+  <mat-card class="characters__card" *ngFor="let character of characters" >
+    <img mat-card-image
+    [src]="character.image"
+    [alt]="character.name"
+    >
+    <mat-card-content>
+      <p>{{character.name}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="primary"
+       mat-flat-button
+       >UPDATE</button>
+      <button class="primary"
+      (click)="onClick(character.id)"
+      mat-flat-button>DELETE</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
+
+ <!-- <form class="example-full-width" [formGroup]="createCharacter"
+ (ngSubmit)="onSubmit()"
+>
+   <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+</form> -->
+
+<!-- <div class="container">
+  <app-form-search></app-form-search>
+</div> -->
+  <!-- *ngFor="let character of characters" -->
+<!-- <a [routerLink]="['/character-details', character.id]" href=""> -->
+    <!-- <img mat-card-image
+    [src]="character.image"
+    [alt]="character.name"
+    > -->

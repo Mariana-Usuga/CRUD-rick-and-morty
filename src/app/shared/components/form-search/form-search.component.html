@@ -1,8 +1,19 @@
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>Character</mat-label>
+<mat-form-field class="example-full-width"
+appearance="fill"
+>
+  <!-- <mat-label>Character</mat-label>
   <input
   #inputSearch
   type="text"
   (keyup)="onSearch(inputSearch.value)"
-   matInput value="Character">
+   matInput value="Character"
+   [(ngModel)]=""
+   > -->
+   <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
 </mat-form-field>

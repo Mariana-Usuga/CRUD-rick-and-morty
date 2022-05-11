@@ -16,7 +16,12 @@ export class CharacterService {
     return this.http.get<Character[]>(filter)
   }
 
-  getDetails(id: number) {
-    return this.http.get<Character>(`/${environment.baseUrlAPI}/${id}`)
-  }
+  // deleteCharacter(query = "", page = 1){
+  //   const filter = `${environment.baseUrlAPI}/?name=${query}&pages=${page}`
+  //   return this.http.get<Character[]>(filter)
+  // }
+
+  // getDetails(id: number) {
+  //   return this.http.get<Character>(`/${environment.baseUrlAPI}/${id}`)
+  // }
 }
