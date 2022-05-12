@@ -32,30 +32,35 @@ class="mat-elevation-z8">
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<div>
+<!-- <div *ngIf="submitted && createCharacter.invalid">Create</div> -->
+<form [formGroup]="createCharacter" (ngSubmit)="addCharacter()">
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Image</mat-label>
       <input matInput placeholder="Image"
-      formContronlName="image"
+      formControlName="image"
       >
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="standard">
       <mat-label>Name</mat-label>
-      <input matInput placeholder="Name">
+      <input matInput placeholder="Name"
+      formControlName="name"
+      >
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
-      <input matInput placeholder="Gender">
+      <input matInput placeholder="Gender"
+      formControlName="gender"
+      >
     </mat-form-field>
   </p>
   <div>
-    <button>Create</button>
+    <button type="submit">Create</button>
     <!-- <button>Delete</button> -->
   </div>
-</div>
+</form>
 </div>

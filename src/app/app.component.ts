@@ -5,6 +5,7 @@ import { CharacterService } from './shared/services/character.service';
 import { environment } from '@enviroment/environment';
 import { take } from 'rxjs';
 import Swal from 'sweetalert2'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ export class AppComponent implements OnInit {
 
   displayedColumns: string[] = ['image','name', 'gender', 'updateDelete'];
   characters: Character[] = [];
+  createCharacter!: FormGroup;
+  submitted = false;
   // createCharacter!: Character;
   // info: RequestInfo = {
   //   next: "",
@@ -26,7 +29,13 @@ export class AppComponent implements OnInit {
   // private hideScrollHeight = 200;
   // private showScrollHeight = 500;
 
-  constructor(private characterSvc: CharacterService) { }
+  constructor(private characterSvc: CharacterService, private fb: FormBuilder) {
+    this.createCharacter =  this.fb.group({
+      image: [""],
+      name:['', Validators.required],
+      gender:['', Validators.required],
+    })
+  }
 
   ngOnInit(): void {
     console.log('wor', environment.baseUrlAPI)
@@ -58,6 +67,22 @@ export class AppComponent implements OnInit {
         this.characters = this.characters.filter(character => character.id != id)
       }
     })
+  }
+
+  addCharacter() {
+    console.log(this.createCharacter)
+    this.submitted = true;
+    if(this.createCharacter.invalid){
+      return;
+    }
+
+    const character: any = {
+      image: this.createCharacter.value.image,
+      name: this.createCharacter.value.name,
+      gender: this.createCharacter.value.gender,
+    }
+
+    this.characters = [...this.characters, character]
   }
   // onSubmit(){
   //   console.log(this.createCharacter)
