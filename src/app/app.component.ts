@@ -6,6 +6,7 @@ import { environment } from '@enviroment/environment';
 import { take } from 'rxjs';
 import Swal from 'sweetalert2'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -19,17 +20,15 @@ export class AppComponent implements OnInit {
   characters: Character[] = [];
   createCharacter!: FormGroup;
   submitted = false;
-  // createCharacter!: Character;
-  // info: RequestInfo = {
-  //   next: "",
-  // }
+  public files: any = [];
+  public previewImage!: string
 
   private pageNum = 1;
   private query!: string;
-  // private hideScrollHeight = 200;
-  // private showScrollHeight = 500;
 
-  constructor(private characterSvc: CharacterService, private fb: FormBuilder) {
+  constructor(private characterSvc: CharacterService,
+    private sanitizer :DomSanitizer,
+    private fb: FormBuilder) {
     this.createCharacter =  this.fb.group({
       image: [""],
       name:['', Validators.required],
@@ -43,15 +42,12 @@ export class AppComponent implements OnInit {
   }
 
   private getDataFromServices():void{
-    console.log('entra en getdata')
     this.characterSvc.searchCharacters(this.query, this.pageNum)
     .pipe(
       take(1)
     ).subscribe((res: any) => {
       const { info, results } = res;
-      console.log('re', results)
       this.characters = [...this.characters, ...results]
-      // this.info = info
     })
   }
 
@@ -68,7 +64,12 @@ export class AppComponent implements OnInit {
       }
     })
   }
-
+  captureFile(event: any):any{
+    const captureFile = event.target.files[0]
+    this.extraerBase64(captureFile).then((image: any) => {
+      this.previewImage = image.base;
+    })
+  }
   addCharacter() {
     console.log(this.createCharacter)
     this.submitted = true;
@@ -77,13 +78,34 @@ export class AppComponent implements OnInit {
     }
 
     const character: any = {
-      image: this.createCharacter.value.image,
+      image: this.previewImage,
       name: this.createCharacter.value.name,
       gender: this.createCharacter.value.gender,
     }
 
     this.characters = [...this.characters, character]
   }
+
+  extraerBase64 = async ($event: any) => new Promise((resolve, reject):any => {
+    try{
+      const unsafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        resolve({
+          base:reader.result
+        })
+      }
+      reader.onerror = error => {
+        resolve({
+          base:null
+        })
+      }
+    }catch (e) {
+      return null
+    }
+  })
   // onSubmit(){
   //   console.log(this.createCharacter)
   // }

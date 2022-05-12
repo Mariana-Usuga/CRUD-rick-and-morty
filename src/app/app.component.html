@@ -32,16 +32,18 @@ class="mat-elevation-z8">
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<!-- <div *ngIf="submitted && createCharacter.invalid">Create</div> -->
 <form [formGroup]="createCharacter" (ngSubmit)="addCharacter()">
   <p>
-    <mat-form-field appearance="legacy">
       <mat-label>Image</mat-label>
-      <input matInput placeholder="Image"
+      <input placeholder="Image"
       formControlName="image"
-      >
-    </mat-form-field>
+      type="file"
+      (change)="captureFile($event)"
+    >
   </p>
+  <div *ngIf="previewImage">
+    <img [src]="previewImage" alt="">
+  </div>
   <p>
     <mat-form-field appearance="standard">
       <mat-label>Name</mat-label>
@@ -64,3 +66,7 @@ class="mat-elevation-z8">
   </div>
 </form>
 </div>
+
+
+
+<!-- (change)="capturandoFile" -->
