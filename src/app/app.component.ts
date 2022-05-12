@@ -14,7 +14,8 @@ import Swal from 'sweetalert2'
 export class AppComponent implements OnInit {
   title = 'CRUD-rick-and-morty';
 
-  @Input() characters: Character[] = [];
+  displayedColumns: string[] = ['image','name', 'gender', 'updateDelete'];
+  characters: Character[] = [];
   // createCharacter!: Character;
   // info: RequestInfo = {
   //   next: "",
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
       take(1)
     ).subscribe((res: any) => {
       const { info, results } = res;
+      console.log('re', results)
       this.characters = [...this.characters, ...results]
       // this.info = info
     })
@@ -57,7 +59,6 @@ export class AppComponent implements OnInit {
       }
     })
   }
-
   // onSubmit(){
   //   console.log(this.createCharacter)
   // }

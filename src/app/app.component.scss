@@ -1,11 +1,13 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-.characters{
+table{
+  // width: 60%;
+}
+img{
+  width: 100px;
+}
+
+.container{
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  &__card{
-    max-width: 200px;
-  }
 }
 

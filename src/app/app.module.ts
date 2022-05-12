@@ -16,6 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule }  from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatButtonModule,
     MatTableModule,
     MatNativeDateModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatListModule,
+    MatFormFieldModule
   ],
   exports:[
     MatTableModule,
