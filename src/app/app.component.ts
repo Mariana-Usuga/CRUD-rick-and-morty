@@ -26,6 +26,8 @@ export class AppComponent implements OnInit {
   private pageNum = 1;
   private query!: string;
 
+  selectedCharacter!: Character;
+
   constructor(private characterSvc: CharacterService,
     private sanitizer :DomSanitizer,
     private fb: FormBuilder) {
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
       take(1)
     ).subscribe((res: any) => {
       const { info, results } = res;
+      console.log('res', results)
       this.characters = [...this.characters, ...results]
     })
   }
@@ -64,12 +67,30 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  updateCharacter(character: Character):void{
+    // this.selectedCharacter = character;
+    this.createCharacter = this.fb.group({
+      image: [""],
+      name:[character.name , Validators.required],
+      gender:[character.gender, Validators.required],
+    })
+    this.characters = this.characters
+    .map((c) => character.id === c.id ?
+     {...c, name : character.name} : c)
+
+    //  this.characters = [...this.characters, charactersUpdate]
+     console.log('this', this.characters)
+
+  }
+
   captureFile(event: any):any{
     const captureFile = event.target.files[0]
     this.extraerBase64(captureFile).then((image: any) => {
       this.previewImage = image.base;
     })
   }
+
   addCharacter() {
     console.log(this.createCharacter)
     this.submitted = true;
@@ -83,7 +104,13 @@ export class AppComponent implements OnInit {
       gender: this.createCharacter.value.gender,
     }
 
-    this.characters = [...this.characters, character]
+    this.characters = [character, ...this.characters]
+    this.createCharacter = this.fb.group({
+      image: [""],
+      name:['', Validators.required],
+      gender:['', Validators.required],
+    })
+    this.previewImage = " "
   }
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject):any => {
