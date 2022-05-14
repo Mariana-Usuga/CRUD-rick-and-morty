@@ -75,13 +75,14 @@ export class AppComponent implements OnInit {
       name:[character.name , Validators.required],
       gender:[character.gender, Validators.required],
     })
-    this.characters = this.characters
+  }
+  nose(character: Character){
+    const n = this.characters
     .map((c) => character.id === c.id ?
      {...c, name : character.name} : c)
 
-    //  this.characters = [...this.characters, charactersUpdate]
+     this.characters = n;
      console.log('this', this.characters)
-
   }
 
   captureFile(event: any):any{

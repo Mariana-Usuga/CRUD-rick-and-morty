@@ -25,6 +25,7 @@ class="mat-elevation-z8">
     <td mat-cell *matCellDef="let character">
       <button  (click)="updateCharacter(character)">Update</button>
       <button (click)="onClick(character.id)">Delete</button>
+      <button type="button" (click)="nose(character)">sdmckm</button>
     </td>
   </ng-container>
 
@@ -62,7 +63,6 @@ class="mat-elevation-z8">
   </p>
   <div>
     <button type="submit">Create</button>
-    <!-- <button>Delete</button> -->
   </div>
 </form>
 </div>
