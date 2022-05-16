@@ -101,7 +101,6 @@ export class AppComponent implements OnInit {
 //     }];
 //      const ne = no.map((n) => n.id === 1 ?
 //      {...n, nam : c.name } : n)
-// console.log('pruebaa', ne)
     //  this.characters = n;
     //  console.log('this', this.characters);
   }
