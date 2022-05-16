@@ -83,6 +83,7 @@ export class AppComponent implements OnInit {
 
      this.characters = n;
      console.log('this', this.characters)
+     //bla
   }
 
   captureFile(event: any):any{
