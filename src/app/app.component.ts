@@ -26,12 +26,17 @@ export class AppComponent implements OnInit {
   private pageNum = 1;
   private query!: string;
 
-  selectedCharacter!: Character;
+  selectedCharacter!: FormGroup;
 
   constructor(private characterSvc: CharacterService,
     private sanitizer :DomSanitizer,
     private fb: FormBuilder) {
     this.createCharacter =  this.fb.group({
+      image: [""],
+      name:['', Validators.required],
+      gender:['', Validators.required],
+    })
+    this.selectedCharacter =  this.fb.group({
       image: [""],
       name:['', Validators.required],
       gender:['', Validators.required],
@@ -75,16 +80,33 @@ export class AppComponent implements OnInit {
       name:[character.name , Validators.required],
       gender:[character.gender, Validators.required],
     })
-  }
-  nose(character: Character){
-    const n = this.characters
-    .map((c) => character.id === c.id ?
-     {...c, name : character.name} : c)
+    const c: any = {
+      image: this.previewImage,
+      name: this.createCharacter.value.name,
+      gender: this.createCharacter.value.gender,
+    }
 
-     this.characters = n;
-     console.log('this', this.characters)
-     //bla
-     //bla
+    // this.characters = [c, ...this.characters]
+    // console.log('ca', character)
+    this.characters = this.characters
+    .map((ch) => character.id === ch.id ?
+     {...ch, name : c.name } : ch)
+     console.log('PRUE', this.characters)
+
+//      const no = [{
+//       id: 1, nam:"mar", soy:"estu"
+//      },
+//     {
+//       id: 2, nam:"mar", soy:"estu"
+//     }];
+//      const ne = no.map((n) => n.id === 1 ?
+//      {...n, nam : c.name } : n)
+// console.log('pruebaa', ne)
+    //  this.characters = n;
+    //  console.log('this', this.characters);
+  }
+  nose(){
+      window.location.reload();
   }
 
   captureFile(event: any):any{
